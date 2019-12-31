@@ -1,11 +1,9 @@
 pipeline {
-  agent { docker { image 'python:3.7.2' } }
+  agent { docker { image 'python:3.7.2' args '--user 0:0'} }
   stages {
     stage('build') {
       steps {
-        sh 'python3 -m venv env'
-        sh 'source ./env/bin/activate'
-        sh 'python -m pip install -r requirements.txt'
+        sh 'pip install -r requirements.txt'
       }
     }
     stage('test') {
